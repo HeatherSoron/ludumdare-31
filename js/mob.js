@@ -1,6 +1,7 @@
 var mobs = [];
 
 var mobSize = 40;
+var mobSpeed = 2;
 
 function Mob(x, y, color) {
 	this.x = x;
@@ -32,6 +33,21 @@ Mob.prototype.sim = function() {
 	if (this.sufferAttack()) {
 		console.log("Stopping mob sim");
 		return false;
+	}
+	
+	// move towards the player, and flip around if you've passed the player
+	if (this.left) {
+		if (this.x + mobSize > player.x) {
+			this.x -= mobSpeed;
+		} else {
+			this.left = false;
+		}
+	} else {
+		if (this.x < player.x + player.width) {
+			this.x += mobSpeed;
+		} else {
+			this.left = true;
+		}
 	}
 	
 	this.attackPlayer();
