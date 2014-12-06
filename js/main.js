@@ -58,7 +58,10 @@ function Platform(left, right, y, color) {
 
 Platform.prototype.trySpawn = function() {
 	if ((Math.random() * 500) < 1) {
-		var width = this.right - this.left;
+		var width = (this.right - mobSize) - this.left;
+		if (width < 0) {
+			width = 0;
+		}
 		mobs.push(new Mob(this.left + Math.random() * width, this.y - mobSize, this.color));
 	}
 }
