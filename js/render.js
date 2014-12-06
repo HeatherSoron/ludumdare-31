@@ -12,7 +12,9 @@ var colors = [
 
 function render() {
 	clearCtx();
-	player.draw();
+	if (!lost) {
+		player.draw();
+	}
 	
 	for (var i = 0; i < mobs.length; ++i) {
 		mobs[i].draw();
@@ -23,6 +25,11 @@ function render() {
 			platform = platforms[y][j];
 			platform.draw();
 		}
+	}
+	
+	if (lost) {
+		ctx.fillStyle = "black";
+		ctx.fillText("YOU LOSE", 100, 100);
 	}
 }
 

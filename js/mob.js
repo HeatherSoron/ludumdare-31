@@ -33,6 +33,9 @@ Mob.prototype.sim = function() {
 		console.log("Stopping mob sim");
 		return false;
 	}
+	
+	this.attackPlayer();
+	
 	return true;
 }
 
@@ -50,4 +53,13 @@ Mob.prototype.sufferAttack = function() {
 		}
 	}
 	return false;
+}
+
+Mob.prototype.attackPlayer = function() {
+	if (this.x < player.x + player.width && this.x + mobSize > player.x && this.y < player.y + player.height && this.y + mobSize > player.y) {
+		if (this.color.interactsWith(player.getColor())) {
+			lost = true;
+			clearInterval(gameLoop);
+		}
+	}
 }

@@ -2,6 +2,7 @@ var gameLoop;
 
 var fallSpeed = 4;
 
+var lost = false;
 
 function init() {
 	canvas = document.getElementById("game");
