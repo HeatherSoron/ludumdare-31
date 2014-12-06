@@ -80,6 +80,8 @@ player.endJump = function() {
 	player.jumping = 0;
 }
 
+// I tried placing the platform below the player, but it was exploitable
+// so, platforms now spawn ABOVE the player
 player.placePlatform = function(colorIndex) {
 	// remember that colorIndex can be false-y! (0 is a valid value)
 	if (colorIndex === undefined) {
@@ -90,7 +92,7 @@ player.placePlatform = function(colorIndex) {
 	new Platform(
 		this.x - margin,
 		this.x + this.width + margin,
-		this.y + this.height,
+		this.y - fallSpeed / 2, // the offset adds a neat visual effect due to physics granularity
 		colors[colorIndex]
 	);
 }
