@@ -2,9 +2,7 @@ var gameLoop;
 
 var fallSpeed = 4;
 
-var platforms = [
-];
-
+var lost = false;
 
 function init() {
 	canvas = document.getElementById("game");
@@ -20,39 +18,39 @@ function init() {
 }
 
 function runGame() {
-	if (player.jumping) {
-		player.continueJump();
-	} else if (!player.grounded()) {
-		player.y += fallSpeed;
+	player.sim();
+	
+	var deadMobs = [];
+	for (var i = 0; i < mobs.length; ++i) {
+		if (!mobs[i].sim()) {
+			deadMobs.push(i);
+		}
 	}
 	
-	if (player.running) {
-		player.x += player.running * 3;
+	for (var i = deadMobs.length - 1; i >= 0; i--) {
+		mobs.splice(deadMobs[i], 1);
+	}
+	
+	for (var y in platforms) {
+		for (var j = 0; j < platforms[y].length; ++j) {
+			platform = platforms[y][j];
+			platform.trySpawn();
+		}
 	}
 	
 	render();
 }
 
 
-function Platform(left, right, y, color) {
-	this.left = left;
-	this.right = right;
+function Point(x, y) {
+	this.x = x;
 	this.y = y;
-	this.color = color;
-	
-	// register the platform in the global list
-	if (!platforms[y]) {
-		platforms[y] = [];
-	}
-	
-	platforms[y].push(this);
-	console.log("Placing platform", this);
 }
 
-Platform.prototype.draw = function() {
-	ctx.strokeStyle = this.color.toString();
-	ctx.beginPath();
-	ctx.moveTo(this.left, this.y);
-	ctx.lineTo(this.right, this.y);
-	ctx.stroke();
+Point.prototype.dist = function(other) {
+	return Math.sqrt(this.distSqr(other));
+}
+
+Point.prototype.distSqr = function(other) {
+	return Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2);
 }

@@ -1,10 +1,51 @@
 var player = {x: 50, y: 50, width: 30, height: 30, color: 0};
 
+var maxAttackRadius = 40;
+
+player.getCenter = function() {
+	return new Point(this.x + this.width/2, this.y + this.height/2);
+}
+
+player.sim = function() {
+	if (this.jumping) {
+		this.continueJump();
+	} else if (!this.grounded()) {
+		this.y += fallSpeed;
+	}
+	
+	if (this.running) {
+		this.x += this.running * 3;
+	}
+	
+	if (this.attackBall) {
+		if (this.attackBall.growing) {
+			if (this.attackBall.radius < maxAttackRadius) {
+				this.attackBall.radius += 2;
+			} else {
+				this.attackBall.growing = false;
+			}
+		} else {
+			this.attackBall.radius -= 2;
+			if (this.attackBall.radius < 0) {
+				this.attackBall = undefined;
+			}
+		}
+	}
+}
+
+
 player.draw = function() {
 	ctx.beginPath();
 	ctx.fillStyle = this.getColor().toString();
 	ctx.rect(this.x, this.y, this.width, this.height);
 	ctx.fill();
+	
+	if (this.attackBall) {
+		ctx.beginPath();
+		ctx.fillStyle = this.attackBall.color.toString();
+		ctx.arc(this.x + this.width/2, this.y + this.height/2, this.attackBall.radius, 0, Math.PI*2);
+		ctx.fill();
+	}
 }
 
 player.getColor = function() {
@@ -95,4 +136,17 @@ player.placePlatform = function(colorIndex) {
 		this.y - fallSpeed / 2, // the offset adds a neat visual effect due to physics granularity
 		colors[colorIndex]
 	);
+}
+
+player.attack = function(colorIndex) {
+	// remember that colorIndex can be false-y! (0 is a valid value)
+	if (colorIndex === undefined) {
+		colorIndex = this.color;
+	}
+	
+	this.attackBall = {
+		growing: true,
+		radius: 0,
+		color: colors[colorIndex],
+	};
 }
