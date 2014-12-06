@@ -37,7 +37,12 @@ function init() {
 }
 
 function runGame() {
+	clearCtx();
 	player.draw();
+}
+
+function clearCtx() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function registerListeners() {
