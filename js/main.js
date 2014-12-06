@@ -1,5 +1,6 @@
 var gameLoop;
 
+var fallSpeed = 4;
 
 var platforms = [
 ];
@@ -20,10 +21,9 @@ function init() {
 
 function runGame() {
 	if (player.jumping) {
-		player.y -= 4;
-		player.jumping--;
+		player.continueJump();
 	} else if (!player.grounded()) {
-		player.y += 4;
+		player.y += fallSpeed;
 	}
 	
 	if (player.running) {

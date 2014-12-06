@@ -22,7 +22,6 @@ function registerListeners() {
 }
 
 function handleKeyDown(e) {
-	console.log(e);
 	document.getElementById("keycode").innerHTML = e.keyCode;
 	
 	switch (e.keyCode) {

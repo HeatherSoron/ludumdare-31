@@ -29,18 +29,45 @@ player.moveRight = function() {
 
 player.grounded = function() {
 	for (var y in platforms) {
-		if (y > this.y && y <= this.y + this.height) {
+		if (y > this.y + this.height - (fallSpeed + 1) && y <= this.y + this.height) {
 			for (var i in platforms[y]) {
 				var platform = platforms[y][i];
-				if (platform.right > this.x && platform.left < this.x + this.width) {
-					if (this.getColor().interactsWith(platform.color)) {
-						return true;
-					}
+				if (this.intersectsPlatform(platform)) {
+					return true;
 				}
 			}
 		}
 	}
 	return false;
+}
+
+player.intersectsPlatform = function(platform) {
+	if (platform.right > this.x && platform.left < this.x + this.width) {
+		if (this.getColor().interactsWith(platform.color)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+player.continueJump = function() {
+	var top = player.y - fallSpeed;
+	// make sure we haven't hit a platform. If we have, abort.
+	for (var y = player.y - fallSpeed; y <= player.y; y++) {
+		if (platforms[y]) {
+			for (var i in platforms[y]) {
+				if (this.intersectsPlatform(platforms[y][i])) {
+					this.jumping = 0;
+					return false;
+				}
+			}
+		}
+	}
+	
+	player.y -= fallSpeed;
+	player.jumping--;
+	
+	return true;
 }
 
 player.startJump = function() {
@@ -59,10 +86,10 @@ player.placePlatform = function(colorIndex) {
 		colorIndex = this.color;
 	}
 	
-	var halfWidth = this.width / 2;
+	var margin = this.width;
 	new Platform(
-		this.x - halfWidth,
-		this.x + this.width + halfWidth,
+		this.x - margin,
+		this.x + this.width + margin,
 		this.y + this.height,
 		colors[colorIndex]
 	);
