@@ -28,16 +28,27 @@ function runGame() {
 			deadMobs.push(i);
 		}
 	}
-	
 	for (var i = deadMobs.length - 1; i >= 0; i--) {
 		mobs.splice(deadMobs[i], 1);
 	}
+	
 	
 	for (var y in platforms) {
 		for (var j = 0; j < platforms[y].length; ++j) {
 			platform = platforms[y][j];
 			platform.trySpawn();
 		}
+	}
+	
+	
+	var grabbedItems = [];
+	for (var i = 0; i < items.length; ++i) {
+		if (items[i].touchedByPlayer()) {
+			grabbedItems.push(i);
+		}
+	}
+	for (var i = grabbedItems.length - 1; i >= 0; --i) {
+		items.splice(grabbedItems[i], 1);
 	}
 	
 	render();
