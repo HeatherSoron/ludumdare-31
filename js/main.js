@@ -72,6 +72,7 @@ function init() {
 	registerListeners();
 	
 	new Platform(0, canvas.width, canvas.height, new Color(0,0,0,1));
+	player.y = canvas.height - player.height * 2;
 	
 	gameLoop = setInterval(runGame, 25);
 }
@@ -80,6 +81,11 @@ function runGame() {
 	if (!player.grounded()) {
 		player.y += 2;
 	}
+	
+	if (player.running) {
+		player.x += player.running * 3;
+	}
+	
 	render();
 }
 
@@ -100,6 +106,7 @@ function clearCtx() {
 
 function registerListeners() {
 	document.addEventListener('keydown', handleKeyDown);
+	document.addEventListener('keyup', handleKeyUp);
 }
 
 function handleKeyDown(e) {
@@ -108,11 +115,11 @@ function handleKeyDown(e) {
 	
 	switch (e.keyCode) {
 		case keys.left:
-			player.moveLeft();
+			player.running = -1;
 			e.preventDefault();
 			break;
 		case keys.right:
-			player.moveRight();
+			player.running = 1;
 			e.preventDefault();
 			break;
 		case keys.up:
@@ -123,6 +130,14 @@ function handleKeyDown(e) {
 			player.colorDown();
 			e.preventDefault();
 			break;
+	}
+}
+
+function handleKeyUp(e) {
+	switch(e.keyCode) {
+		case keys.left:
+		case keys.right:
+			player.running = 0;
 	}
 }
 
