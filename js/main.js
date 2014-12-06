@@ -1,5 +1,6 @@
 var canvas;
 var ctx;
+var gameLoop;
 
 var alpha = 1.0 / 3.0;
 
@@ -32,6 +33,10 @@ function init() {
 	
 	registerListeners();
 	
+	gameLoop = setInterval(runGame, 25);
+}
+
+function runGame() {
 	player.draw();
 }
 
