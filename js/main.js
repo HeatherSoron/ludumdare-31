@@ -17,14 +17,17 @@ function init() {
 }
 
 function runGame() {
-	if (player.jumping) {
-		player.continueJump();
-	} else if (!player.grounded()) {
-		player.y += fallSpeed;
+	player.sim();
+	
+	var deadMobs = [];
+	for (var i = 0; i < mobs.length; ++i) {
+		if (!mobs[i].sim()) {
+			deadMobs.push(i);
+		}
 	}
 	
-	if (player.running) {
-		player.x += player.running * 3;
+	for (var i = deadMobs.length - 1; i >= 0; i--) {
+		mobs.splice(deadMobs[i], 1);
 	}
 	
 	for (var y in platforms) {
@@ -35,4 +38,18 @@ function runGame() {
 	}
 	
 	render();
+}
+
+
+function Point(x, y) {
+	this.x = x;
+	this.y = y;
+}
+
+Point.prototype.dist = function(other) {
+	return Math.sqrt(this.distSqr(other));
+}
+
+Point.prototype.distSqr = function(other) {
+	return Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2);
 }

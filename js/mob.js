@@ -27,3 +27,27 @@ Mob.prototype.draw = function() {
 	ctx.fillStyle = this.color;
 	ctx.fill();
 }
+
+Mob.prototype.sim = function() {
+	if (this.sufferAttack()) {
+		console.log("Stopping mob sim");
+		return false;
+	}
+	return true;
+}
+
+Mob.prototype.sufferAttack = function() {
+	if (player.attackBall) {
+		var pcenter = player.getCenter();
+		var rad = player.attackBall.radius;
+		// had to look up the geometry for this circle and rectangle thing- http://stackoverflow.com/a/1879223
+		var nearX = Math.max(this.x, Math.min(pcenter.x, this.x + mobSize));
+		var nearY = Math.max(this.y, Math.min(pcenter.y, this.y + mobSize));
+		if (pcenter.dist(new Point(nearX, nearY)) <= rad) {
+			if (this.color.interactsWith(player.attackBall.color)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}

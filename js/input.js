@@ -15,6 +15,8 @@ var keys = {
 	'down': 40,
 }
 
+var keysHeld = [];
+
 
 function registerListeners() {
 	document.addEventListener('keydown', handleKeyDown);
@@ -33,6 +35,22 @@ function handleKeyDown(e) {
 			break;
 		case keys.e:
 			player.placePlatform(2);
+			break;
+		
+		case keys.a:
+			if (!keysHeld[e.keyCode]) {
+				player.attack(0);
+			}
+			break;
+		case keys.s:
+			if (!keysHeld[e.keyCode]) {
+				player.attack(1);
+			}
+			break;
+		case keys.d:
+			if (!keysHeld[e.keyCode]) {
+				player.attack(2);
+			}
 			break;
 			
 		case keys.left:
@@ -58,6 +76,8 @@ function handleKeyDown(e) {
 			e.preventDefault();
 			break;
 	}
+	
+	keysHeld[e.keyCode] = true;
 }
 
 function handleKeyUp(e) {
@@ -69,4 +89,6 @@ function handleKeyUp(e) {
 		case keys.space:
 			player.endJump();
 	}
+	
+	keysHeld[e.keyCode] = false;
 }
