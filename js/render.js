@@ -32,10 +32,31 @@ function Color(r, g, b, a) {
 	this.g = g;
 	this.b = b;
 	this.a = a;
+	
+	if (r == 0 && g == 0 && b == 0) {
+		this.black = true;
+	} else {
+		this.black = false;
+	}
 }
 
 Color.prototype.toString = function() {
 	return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + this.a + ')';
+}
+
+Color.prototype.interactsWith = function(otherColor) {
+	if (this.black || otherColor.black) {
+		return true;
+	}
+	
+	var comp = ['r', 'g', 'b'];
+	for (c in comp) {
+		if (this[comp[c]] && otherColor[comp[c]]) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 

@@ -19,8 +19,11 @@ function init() {
 }
 
 function runGame() {
-	if (!player.grounded()) {
-		player.y += 2;
+	if (player.jumping) {
+		player.y -= 4;
+		player.jumping--;
+	} else if (!player.grounded()) {
+		player.y += 4;
 	}
 	
 	if (player.running) {
@@ -43,6 +46,7 @@ function Platform(left, right, y, color) {
 	}
 	
 	platforms[y].push(this);
+	console.log("Placing platform", this);
 }
 
 Platform.prototype.draw = function() {
