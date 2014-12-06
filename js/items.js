@@ -36,17 +36,20 @@ function makeGoalStars() {
 	goal.draw = drawGoalStar;
 	goal.goalType = 'red';
 	items.push(goal);
+	new Platform(0, 50, sideStarHeight + 20, colors[0]);
 	
 	goal = new Item(canvas.width / 2, 75, goalStarOuter, new Color(255, 0, 255, 1));
 	goal.draw = drawGoalStar;
 	goal.goalType = 'green';
 	items.push(goal);
+	new Platform(canvas.width/2 - 25, canvas.width/2 + 25, 95, colors[1]);
 	
 	// give this a color that has a BIT more contrast than pure yellow...
 	goal = new Item(canvas.width - 25, sideStarHeight, goalStarOuter, new Color(235, 235, 0, 1));
 	goal.draw = drawGoalStar;
 	goal.goalType = 'blue';
 	items.push(goal);
+	new Platform(canvas.width - 50, canvas.width, sideStarHeight + 20, colors[2]);
 }
 
 function Item(x, y, pickupRadius, color) {
