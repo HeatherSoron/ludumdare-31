@@ -16,6 +16,10 @@ function render() {
 		player.draw();
 	}
 	
+	for (var i = 0; i < items.length; ++i) {
+		items[i].draw();
+	}
+	
 	for (var i = 0; i < mobs.length; ++i) {
 		mobs[i].draw();
 	}

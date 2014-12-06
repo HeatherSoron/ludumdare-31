@@ -14,6 +14,8 @@ function init() {
 	new Platform(0, canvas.width, canvas.height, new Color(0,0,0,1));
 	player.y = canvas.height - player.height * 2;
 	
+	makeGoalStars();
+	
 	gameLoop = setInterval(runGame, 25);
 }
 
@@ -53,4 +55,9 @@ Point.prototype.dist = function(other) {
 
 Point.prototype.distSqr = function(other) {
 	return Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2);
+}
+
+// create new point by offseting by x units, in a particular direction
+Point.prototype.offsetByRadius= function(rad, angle) {
+	return new Point(this.x + rad * Math.cos(angle), this.y + rad * Math.sin(angle));
 }
