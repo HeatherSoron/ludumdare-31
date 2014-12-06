@@ -39,6 +39,12 @@ function render() {
 
 function clearCtx() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	// put a grey background for contrast
+	ctx.beginPath();
+	ctx.fillStyle = 'rgb(248,248,248)';
+	ctx.rect(0, 0, canvas.width, canvas.height);
+	ctx.fill();
 }
 
 
