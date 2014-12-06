@@ -68,6 +68,16 @@ Mob.prototype.sufferAttack = function() {
 		var nearY = Math.max(this.y, Math.min(pcenter.y, this.y + mobSize));
 		if (pcenter.dist(new Point(nearX, nearY)) <= rad) {
 			if (this.color.interactsWith(player.attackBall.color)) {
+				for (var key in player.power) {
+					// award player points on colors that this mob DOESN'T have
+					if (!this.color[key[0]]) {
+						var max = player.power[key][1];
+						player.power[key][0] += max / 10;
+						if (player.power[key][0] > max) {
+							player.power[key][0] = max;
+						}
+					}
+				}
 				return true;
 			}
 		}
@@ -78,8 +88,16 @@ Mob.prototype.sufferAttack = function() {
 Mob.prototype.attackPlayer = function() {
 	if (this.x < player.x + player.width && this.x + mobSize > player.x && this.y < player.y + player.height && this.y + mobSize > player.y) {
 		if (this.color.interactsWith(player.getColor())) {
-			lost = true;
-			clearInterval(gameLoop);
+			for (var key in player.power) {
+				// damage player power corresponding to this object's colors
+				if (this.color.black || this.color[key[0]]) {
+					player.power[key][0] -= 1;
+					if (player.power[key][0] <= 0) {
+						lost = true;
+						clearInterval(gameLoop);
+					}
+				}
+			}
 		}
 	}
 }

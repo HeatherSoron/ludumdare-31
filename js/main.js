@@ -17,6 +17,12 @@ function init() {
 	
 	player.goals = [];
 	
+	player.power = {
+		'red': [20, 100],
+		'green': [20, 100],
+		'blue': [20, 100],
+	}
+	
 	makeGoalStars();
 	
 	gameLoop = setInterval(runGame, 25);

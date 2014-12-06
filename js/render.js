@@ -31,6 +31,10 @@ function render() {
 		}
 	}
 	
+	drawPowerBar('red', 20);
+	drawPowerBar('green', canvas.width/2 - 50);
+	drawPowerBar('blue', canvas.width - 120);
+	
 	if (lost) {
 		ctx.fillStyle = "black";
 		ctx.fillText("YOU LOSE", 100, 100);
@@ -48,6 +52,22 @@ function clearCtx() {
 	ctx.fillStyle = 'rgb(248,248,248)';
 	ctx.rect(0, 0, canvas.width, canvas.height);
 	ctx.fill();
+}
+
+function drawPowerBar(colorName, left) {
+	var power = player.power[colorName];
+	
+	ctx.beginPath();
+	ctx.strokeStyle = 'black';
+	ctx.rect(left, 10, power[1], 15);
+	ctx.stroke();
+	
+	ctx.globalAlpha = 0.8;
+	ctx.beginPath();
+	ctx.fillStyle = colorName;
+	ctx.rect(left, 10, power[0], 15);
+	ctx.fill();
+	ctx.globalAlpha = 1;
 }
 
 
