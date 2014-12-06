@@ -3,6 +3,7 @@ var gameLoop;
 var fallSpeed = 4;
 
 var lost = false;
+var won = false;
 
 function init() {
 	canvas = document.getElementById("game");
@@ -13,6 +14,8 @@ function init() {
 	
 	new Platform(0, canvas.width, canvas.height, new Color(0,0,0,1));
 	player.y = canvas.height - player.height * 2;
+	
+	player.goals = [];
 	
 	makeGoalStars();
 	
@@ -44,6 +47,9 @@ function runGame() {
 	var grabbedItems = [];
 	for (var i = 0; i < items.length; ++i) {
 		if (items[i].touchedByPlayer()) {
+			if (items[i].goalType) {
+				player.goals.push(items[i].goalType);
+			}
 			grabbedItems.push(i);
 		}
 	}
@@ -51,9 +57,17 @@ function runGame() {
 		items.splice(grabbedItems[i], 1);
 	}
 	
+	if (player.goals.length == 3) {
+		win();
+	}
+	
 	render();
 }
 
+function win() {
+	won = true;
+	clearInterval(gameLoop);
+}
 
 function Point(x, y) {
 	this.x = x;

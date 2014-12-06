@@ -34,6 +34,9 @@ function render() {
 	if (lost) {
 		ctx.fillStyle = "black";
 		ctx.fillText("YOU LOSE", 100, 100);
+	} else if (won) {
+		ctx.fillStyle = "black";
+		ctx.fillText("YOU WIN!", 100, 100);
 	}
 }
 
