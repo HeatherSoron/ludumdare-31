@@ -30,6 +30,13 @@ function runGame() {
 		player.x += player.running * 3;
 	}
 	
+	for (var y in platforms) {
+		for (var j = 0; j < platforms[y].length; ++j) {
+			platform = platforms[y][j];
+			platform.trySpawn();
+		}
+	}
+	
 	render();
 }
 
@@ -47,6 +54,13 @@ function Platform(left, right, y, color) {
 	
 	platforms[y].push(this);
 	console.log("Placing platform", this);
+}
+
+Platform.prototype.trySpawn = function() {
+	if ((Math.random() * 500) < 1) {
+		var width = this.right - this.left;
+		mobs.push(new Mob(this.left + Math.random() * width, this.y - mobSize, this.color));
+	}
 }
 
 Platform.prototype.draw = function() {

@@ -13,6 +13,11 @@ var colors = [
 function render() {
 	clearCtx();
 	player.draw();
+	
+	for (var i = 0; i < mobs.length; ++i) {
+		mobs[i].draw();
+	}
+	
 	for (var y in platforms) {
 		for (var j = 0; j < platforms[y].length; ++j) {
 			platform = platforms[y][j];
