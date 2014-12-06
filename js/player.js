@@ -129,12 +129,30 @@ player.placePlatform = function(colorIndex) {
 		colorIndex = this.color;
 	}
 	
+	var color = colors[colorIndex];
+	
+	var used = 10;
+	var margin = 10;
+	var spent = false;
+	for (var key in this.power) {
+		if (color[key[0]] && this.power[key][0] >= used + margin) {
+			this.power[key][0] -= used;
+			spent = true;
+			break;
+		}
+	}
+	
+	// nope, player didn't have enough power to spawn a platform
+	if (!spent) {
+		return false;
+	}
+	
 	var margin = this.width;
 	new Platform(
 		this.x - margin,
 		this.x + this.width + margin,
 		this.y - fallSpeed / 2, // the offset adds a neat visual effect due to physics granularity
-		colors[colorIndex]
+		color
 	);
 }
 
