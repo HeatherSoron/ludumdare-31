@@ -50,6 +50,10 @@ Mob.prototype.sim = function() {
 		}
 	}
 	
+	if (!this.grounded()) {
+		this.y += fallSpeed;
+	}
+	
 	this.attackPlayer();
 	
 	return true;
@@ -78,4 +82,27 @@ Mob.prototype.attackPlayer = function() {
 			clearInterval(gameLoop);
 		}
 	}
+}
+
+Mob.prototype.grounded = function() {
+	for (var y in platforms) {
+		if (y > this.y + mobSize - (fallSpeed + 1) && y <= this.y + mobSize) {
+			for (var i in platforms[y]) {
+				var platform = platforms[y][i];
+				if (this.intersectsPlatform(platform)) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+Mob.prototype.intersectsPlatform = function(platform) {
+	if (platform.right > this.x && platform.left < this.x + mobSize) {
+		if (this.color.interactsWith(platform.color)) {
+			return true;
+		}
+	}
+	return false;
 }
