@@ -27,6 +27,15 @@ player.draw = function() {
 	ctx.fill();
 }
 
+// negative numbers don't work with % in JS, it seems
+// so, MUST use a check for < 0
+player.colorDown = function() {
+	player.color--;
+	while (player.color < 0) {
+		player.color = colors.length - player.color;
+	}
+}
+
 function init() {
 	canvas = document.getElementById("game");
 	ctx = canvas.getContext("2d");
@@ -59,7 +68,7 @@ function handleKeyDown(e) {
 			e.preventDefault();
 			break;
 		case keys.down:
-			player.color--;
+			player.colorDown();
 			e.preventDefault();
 			break;
 	}
