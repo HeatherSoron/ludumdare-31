@@ -19,7 +19,7 @@ function makeGoalStars() {
 		}
 		
 		ctx.beginPath();
-		ctx.fillStyle = this.color;
+		ctx.fillStyle = this.color.toString();
 		ctx.moveTo(innerPoints[2].x, innerPoints[2].y);
 		for (var i = 0; i < 5; ++i) {
 			ctx.lineTo(outerPoints[i].x, outerPoints[i].y);

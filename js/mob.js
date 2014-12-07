@@ -25,7 +25,7 @@ Mob.prototype.draw = function() {
 		ctx.lineTo(this.x + mobSize, this. y + mobSize / 2);
 		ctx.lineTo(this.x, this.y);
 	}
-	ctx.fillStyle = this.color;
+	ctx.fillStyle = this.color.toString();
 	ctx.fill();
 }
 
