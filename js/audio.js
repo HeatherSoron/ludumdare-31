@@ -2,6 +2,10 @@ var sfx = {};
 
 function loadAudio() {
 	createSfx('attack');
+	createSfx("failure");
+	createSfx("jump");
+	createSfx("create");
+	createSfx("powerup");
 }
 
 function createSfx(name) {

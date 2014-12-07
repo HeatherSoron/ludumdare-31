@@ -120,6 +120,7 @@ player.continueJump = function() {
 
 player.startJump = function() {
 	if (player.grounded()) {
+		playSfx("jump");
 		player.jumping = 20;
 	}
 }
@@ -151,6 +152,7 @@ player.placePlatform = function(colorIndex) {
 	
 	// nope, player didn't have enough power to spawn a platform
 	if (!spent) {
+		playSfx("failure");
 		return false;
 	}
 	
@@ -161,6 +163,8 @@ player.placePlatform = function(colorIndex) {
 		this.y - fallSpeed / 2, // the offset adds a neat visual effect due to physics granularity
 		color
 	);
+	
+	playSfx("create");
 }
 
 player.attack = function(colorIndex) {
@@ -205,4 +209,5 @@ player.gainGoal = function(type) {
 	if (this.power[type]) {
 		this.power[type][1] += 100;
 	}
+	playSfx("powerup");
 }
