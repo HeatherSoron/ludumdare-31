@@ -46,12 +46,31 @@ function render() {
 	drawPowerBar('blue', canvas.width - (player.power.blue[1] + 20));
 	
 	if (lost) {
-		ctx.fillStyle = "black";
-		ctx.fillText("YOU LOSE", 100, 100);
+		putText("YOU LOSE");
 	} else if (won) {
+		putText("YOU WIN!");
 		ctx.fillStyle = "black";
-		ctx.fillText("YOU WIN!", 100, 100);
 	}
+}
+
+function putText(str) {
+	ctx.font = "bold 50px Arial"
+	
+	ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
+	ctx.fillText(str[0], 200, 200);
+	ctx.fillStyle = "rgba(0, 255, 0, 0.7)";
+	ctx.fillText(str[1], 250, 200);
+	ctx.fillStyle = "rgba(0, 0, 255, 0.7)";
+	ctx.fillText(str[2], 300, 200);
+	
+	ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+	ctx.fillText(str[4], (str[4] == 'W' ? 410 : 400), 200);
+	ctx.fillStyle = "rgba(0, 0, 255, 0.7)";
+	ctx.fillText(str[5], (str[5] == 'I' ? 470 : 450), 200);
+	ctx.fillStyle = "rgba(0, 255, 0, 0.7)";
+	ctx.fillText(str[6], 500, 200);
+	ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
+	ctx.fillText(str[7], 550, 200);
 }
 
 function clearCtx() {
