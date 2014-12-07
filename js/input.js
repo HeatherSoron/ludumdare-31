@@ -101,6 +101,12 @@ function handleKeyDown(e) {
 			break;
 	}
 	
+	
+	if (lost) {
+		lost = false;
+		startGame();
+	}
+	
 	keysHeld[e.keyCode] = true;
 }
 

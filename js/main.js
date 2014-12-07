@@ -14,6 +14,14 @@ function init() {
 	
 	registerListeners();
 	
+	startGame();
+}
+
+function startGame() {
+	platforms = [];
+	items = [];
+	mobs = [];
+	
 	new Platform(0, canvas.width, canvas.height, new Color(0,0,0,1));
 	player.y = canvas.height - player.height * 2;
 	
