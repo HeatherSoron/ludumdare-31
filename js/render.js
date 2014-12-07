@@ -32,8 +32,8 @@ function render() {
 	}
 	
 	drawPowerBar('red', 20);
-	drawPowerBar('green', canvas.width/2 - 50);
-	drawPowerBar('blue', canvas.width - 120);
+	drawPowerBar('green', canvas.width/2 - player.power.green[1]/2);
+	drawPowerBar('blue', canvas.width - (player.power.blue[1] + 20));
 	
 	if (lost) {
 		ctx.fillStyle = "black";

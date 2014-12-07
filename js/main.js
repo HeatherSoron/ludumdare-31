@@ -54,7 +54,7 @@ function runGame() {
 	for (var i = 0; i < items.length; ++i) {
 		if (items[i].touchedByPlayer()) {
 			if (items[i].goalType) {
-				player.goals.push(items[i].goalType);
+				player.gainGoal(items[i].goalType);
 			}
 			grabbedItems.push(i);
 		}

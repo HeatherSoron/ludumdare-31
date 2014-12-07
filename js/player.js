@@ -168,3 +168,10 @@ player.attack = function(colorIndex) {
 		color: colors[colorIndex],
 	};
 }
+
+player.gainGoal = function(type) {
+	this.goals.push(type);
+	if (this.power[type]) {
+		this.power[type][1] += 100;
+	}
+}
