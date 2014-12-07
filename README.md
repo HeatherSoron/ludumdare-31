@@ -7,6 +7,10 @@ Most things in this world can only interact with their own color. However, you h
 Just beware of the terrifying Black, which can absorb power from any color!
 
 
+## Playing the game
+
+This is an entry for Ludum Dare #31. If you came here from the LD website, you've probably already got a link to a web version.
+
 To play the game offline, place all the game files onto a local filesystem, and then open up "index.html" in a web browser.
 
 Chrome or Firefox are recommended. Safari has an annoying auido lag issue, and Internet Explorer is, well, Internet Explorer.
