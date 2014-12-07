@@ -1,11 +1,18 @@
 var keys = {
+	'1': 49,
+	'2': 50,
+	'3': 51,
+	
 	'a': 65,
+	'c': 67,
 	'd': 68,
 	'e': 69,
 	'f': 70,
 	's': 83,
 	'q': 81,
 	'w': 87,
+	'x': 88,
+	'z': 90,
 	
 	'space': 32,
 	
@@ -57,6 +64,19 @@ function handleKeyDown(e) {
 			if (!keysHeld[e.keyCode]) {
 				player.attack();
 			}
+			break;
+		
+		case keys['1']:
+		case keys.z:
+			player.color = 0;
+			break;
+		case keys['2']:
+		case keys.x:
+			player.color = 1;
+			break;
+		case keys['3']:
+		case keys.c:
+			player.color = 2;
 			break;
 			
 		case keys.left:
