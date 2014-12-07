@@ -95,7 +95,7 @@ Mob.prototype.genDeathParticle = function(color, dir) {
 	var variance = Math.PI / 2;
 	var randDir = (Math.random() * variance - variance/2) + dir;
 	var randSpeed = Math.random() + 10;
-	new Particle(this.x, this.y + mobSize/2, this.color, color, 40, randSpeed, decayParticleSpeed, randDir, 0);
+	new Particle(this.x, this.y + mobSize/2, this.color, color, 40, randSpeed, decayParticleSpeed, randDir, 1);
 }
 
 Mob.prototype.attackPlayer = function() {

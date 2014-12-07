@@ -1,6 +1,6 @@
 var particles = [];
 
-function Particle(x, y, startColor, endColor, life, speed, accelFunc, dir, angSpeed) {
+function Particle(x, y, startColor, endColor, life, speed, accelFunc, dir, size) {
 	this.x = x;
 	this.y = y;
 	this.startColor = startColor.clone();
@@ -9,7 +9,7 @@ function Particle(x, y, startColor, endColor, life, speed, accelFunc, dir, angSp
 	this.speed = speed;
 	this.dir = dir;
 	this.accelFunc = accelFunc;
-	this.angSpeed = angSpeed;
+	this.size = size;
 	
 	this.maxLife = this.life;
 	
@@ -48,7 +48,7 @@ Particle.prototype.simAndDraw = function() {
 		color = this.endColor;
 	}
 	
-	drawStar(new Point(this.x, this.y), 5, 2, 7, 0, color);
+	drawStar(new Point(this.x, this.y), 5 * this.size, 2 * this.size, 7, 0, color);
 		
 	if (this.life < 0) {
 		return false;

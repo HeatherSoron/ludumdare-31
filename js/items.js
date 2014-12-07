@@ -55,8 +55,29 @@ Item.prototype.touchedByPlayer = function() {
 	var nearY = Math.max(player.y, Math.min(this.y, player.y + player.height));
 	if (this.getPos().dist(new Point(nearX, nearY)) <= rad) {
 		if (this.color.interactsWith(player.getColor())) {
+			this.makeParticleEffect();
 			return true;
 		}
 	}
 	return false;
+}
+
+Item.prototype.makeParticleEffect = function() {
+	var endColor = this.getEndPartColor();
+	for (var i = 0; i < 14; ++i) {
+		new Particle(this.x, this.y, this.color, endColor, 30, 7, decayParticleSpeed, Math.PI * 2 * (i / 14.0), 1.25);
+	}
+}
+
+Item.prototype.getEndPartColor = function() {
+	var color = this.color;
+	if (this.goalType) {
+		for (var i = 0; i < colors.length; ++i) {
+			if (colors[i].name == this.goalType) {
+				color = colors[i];
+			}
+		}
+	}
+	
+	return color.clone().setAlpha(0.7);
 }
