@@ -10,6 +10,8 @@ function init() {
 	ctx = canvas.getContext("2d");
 	ctx.lineWidth = 4;
 	
+	loadAudio();
+	
 	registerListeners();
 	
 	new Platform(0, canvas.width, canvas.height, new Color(0,0,0,1));

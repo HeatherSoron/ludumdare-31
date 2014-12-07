@@ -196,6 +196,8 @@ player.attack = function(colorIndex) {
 		radius: 0,
 		color: color,
 	};
+	
+	playSfx("attack");
 }
 
 player.gainGoal = function(type) {
