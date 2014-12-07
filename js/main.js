@@ -76,7 +76,8 @@ function runGame() {
 
 function win() {
 	won = true;
-	clearInterval(gameLoop);
+	// do NOT stop playing the game - we'll let the player keep messing around if they want
+	// (also means that the final particle effect has time to play out)
 }
 
 function Point(x, y) {

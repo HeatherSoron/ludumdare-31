@@ -106,8 +106,13 @@ Mob.prototype.attackPlayer = function() {
 				if (this.color.black || this.color[key[0]]) {
 					player.power[key][0] -= 1;
 					if (player.power[key][0] <= 0) {
-						lost = true;
-						clearInterval(gameLoop);
+						// note to self: MUST min-cap if we allow the player to keep playing...
+						// otherwise, results in some, uh... rather interesting graphical bugs
+						player.power[key][0] = 0;
+						if (!won) {
+							lost = true;
+							clearInterval(gameLoop);
+						}
 					}
 				}
 			}
