@@ -17,6 +17,13 @@ player.sim = function() {
 		this.x += this.running * 3;
 	}
 	
+	if (this.x < 0) {
+		this.x = 0;
+	}
+	if (this.x + this.width > canvas.width) {
+		this.x = canvas.width - this.width;
+	}
+	
 	if (this.attackBall) {
 		if (this.attackBall.growing) {
 			if (this.attackBall.radius < maxAttackRadius) {
