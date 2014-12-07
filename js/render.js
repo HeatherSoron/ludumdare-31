@@ -105,6 +105,15 @@ Color.prototype.interactsWith = function(otherColor) {
 	return false;
 }
 
+Color.prototype.clone = function() {
+	return new Color(this.r, this.g, this.b, this.a, this.name);
+}
+
+Color.prototype.setAlpha = function(a) {
+	this.a = a;
+	return this;
+}
+
 
 // DEBUG CODE BELOW
 

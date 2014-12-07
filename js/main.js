@@ -19,6 +19,8 @@ function init() {
 	
 	player.goals = [];
 	
+	player.previousColors = [];
+	
 	player.power = {
 		'red': [50, 100],
 		'green': [50, 100],

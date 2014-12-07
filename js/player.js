@@ -43,9 +43,21 @@ player.sim = function() {
 
 player.draw = function() {
 	ctx.beginPath();
-	ctx.fillStyle = this.getColor().toString();
 	ctx.rect(this.x, this.y, this.width, this.height);
+	
+	for (var i = 0; i < this.previousColors.length; ++i) {
+		ctx.fillStyle = this.previousColors[i].toString();
+		ctx.fill();
+	}
+	
+	
+	ctx.fillStyle = this.getColor().toString();
 	ctx.fill();
+	
+	this.previousColors.push(this.getColor().clone().setAlpha(0.1));
+	if (this.previousColors.length > 15) {
+		this.previousColors.splice(0, this.previousColors.length - 15);
+	}
 	
 	if (this.attackBall) {
 		ctx.beginPath();
