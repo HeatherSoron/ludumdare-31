@@ -4,9 +4,9 @@ var ctx;
 var alpha = 1.0 / 3.0;
 
 var colors = [
-	new Color(255, 0, 0, alpha),
-	new Color(0, 255, 0, alpha),
-	new Color(0, 0, 255, alpha),
+	new Color(255, 0, 0, alpha, 'red'),
+	new Color(0, 255, 0, alpha, 'green'),
+	new Color(0, 0, 255, alpha, 'blue'),
 ];
 
 
@@ -72,11 +72,12 @@ function drawPowerBar(colorName, left) {
 
 
 
-function Color(r, g, b, a) {
+function Color(r, g, b, a, name) {
 	this.r = r;
 	this.g = g;
 	this.b = b;
 	this.a = a;
+	this.name = name;
 	
 	if (r == 0 && g == 0 && b == 0) {
 		this.black = true;

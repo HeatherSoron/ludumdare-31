@@ -72,7 +72,7 @@ Mob.prototype.sufferAttack = function() {
 					// award player points on colors that this mob DOESN'T have
 					if (!this.color[key[0]]) {
 						var max = player.power[key][1];
-						player.power[key][0] += max / 10;
+						player.power[key][0] += max / 20;
 						if (player.power[key][0] > max) {
 							player.power[key][0] = max;
 						}
@@ -91,7 +91,7 @@ Mob.prototype.attackPlayer = function() {
 			for (var key in player.power) {
 				// damage player power corresponding to this object's colors
 				if (this.color.black || this.color[key[0]]) {
-					player.power[key][0] -= 1;
+					player.power[key][0] -= 2;
 					if (player.power[key][0] <= 0) {
 						lost = true;
 						clearInterval(gameLoop);
