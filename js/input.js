@@ -32,8 +32,6 @@ function registerListeners() {
 }
 
 function handleKeyDown(e) {
-	document.getElementById("keycode").innerHTML = e.keyCode;
-	
 	switch (e.keyCode) {
 		case keys.q:
 			player.placePlatform(0);

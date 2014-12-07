@@ -15,15 +15,12 @@
 		<style>
 			.red {
 				color: red;
-				font-weight: bold;
 			}
 			.green {
 				color: rgb(0,255,0);
-				font-weight: bold;
 			}
 			.blue {
 				color: blue;
-				font-weight: bold;
 			}
 			.ctrl {
 				font-weight: bold;
@@ -34,6 +31,11 @@
 	<body onload="init()" style="min-width: 1210px;">
 		<canvas id="game" width=800 height=600 style="border: 1px dashed black; float: left; width: 820px;"></canvas>
 		<div style="float: right; width: 380px; height: 100%;">
+			<p>
+				You, Color-o, live in a world composed of 3 planes (or "colors") of existence: the <span class="red">Red</span>, the <span class="green">Green</span>, and the <span class="blue">Blue</span>.<br/>
+				Most things in this world can only interact with their own color. However, you have the special ability to shift between different colors. You have also heard of the mystical Several Stars, objects of power that belong - somehow! - to <i>two</i> separate colors at once.<br/>
+				Just beware of the terrifying Black, which can absorb power from any color!
+			</p>
 			<p>
 				Placing platforms takes 10 power each.<br/>
 				Attacking takes 0.5 power each time.<br/>
@@ -46,9 +48,9 @@
 				<ul>
 					<li><span class="ctrl">left/right</span> (arrow keys) to move</li>
 					<li><span class="ctrl">space</span> to jump</li>
-					<li><span class="red">1, Z</span>, <span class="green">2, X</span>, <span class="blue">3, C</span>, or up/down to shift color</li>
-					<li><span class="red">Q</span>, <span class="green">W</span>, <span class="blue">E</span> to place colored platforms</li>
-					<li><span class="red">A</span>, <span class="green">S</span>, <span class="blue">D</span> to attack</li>
+					<li><span class="red ctrl">1, Z</span>, <span class="green ctrl">2, X</span>, <span class="blue ctrl">3, C</span>, or up/down to shift color</li>
+					<li><span class="red ctrl">Q</span>, <span class="green ctrl">W</span>, <span class="blue ctrl">E</span> to place colored platforms</li>
+					<li><span class="red ctrl">A</span>, <span class="green ctrl">S</span>, <span class="blue ctrl">D</span> for a power ball (attack)</li>
 					<li><span class="ctrl">F</span> for a super-attack (black!)</li>
 				</ul>
 			</p>
@@ -57,10 +59,9 @@
 				<ul>
 					<li>Kill ALL the enemies - killing enemies refills your power bars</li>
 					<li>When your current color's power is low, you're vulnerable! Switch to a color where you have lots of power, instead.</li>
-					<li>After you've gained a power-up star, you gain double power in a corresponding color</li>
+					<li>Picking up the Several Stars will increase your maximum power</li>
 				</ul>
 			</p>
-			<div class="debug">Key code: <span id="keycode">?</span></div>
 		</div>
 	</body>
 </html>
