@@ -1,4 +1,4 @@
-== Super Color-o RGB: Legend of the Several Stars ==
+==Super Color-o RGB: Legend of the Several Stars==
 
 You, Color-o, live in a world composed of 3 planes (or "colors") of existence: the Red, the Green, and the Blue.
 
