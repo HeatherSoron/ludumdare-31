@@ -2,8 +2,8 @@ var items = [];
 
 function makeGoalStars() {
 	// hmm... I reckon I could draw a star by treating it as points on two separate circles, 180 degrees out of sync...
-	var goalStarOuter = 10;
-	var goalStarInner = 4;
+	var goalStarOuter = 15;
+	var goalStarInner = 6;
 	var innerIndexOffset = 3; // pretty sure we want to draw (i+3)%len if they're 1/2 circle out of sync
 	var drawGoalStar = function() {
 		// I have NO IDEA why the -0.25 is needed, and... oh, right.
@@ -19,20 +19,20 @@ function makeGoalStars() {
 	goal.draw = drawGoalStar;
 	goal.goalType = 'red';
 	items.push(goal);
-	new Platform(0, 50, sideStarHeight + 20, colors[0]);
+	new Platform(0, 50, sideStarHeight + 30, colors[0]);
 	
 	goal = new Item(canvas.width / 2, 75, goalStarOuter, new Color(255, 0, 255, 1));
 	goal.draw = drawGoalStar;
 	goal.goalType = 'green';
 	items.push(goal);
-	new Platform(canvas.width/2 - 25, canvas.width/2 + 25, 95, colors[1]);
+	new Platform(canvas.width/2 - 25, canvas.width/2 + 25, 105, colors[1]);
 	
 	// give this a color that has a BIT more contrast than pure yellow...
 	goal = new Item(canvas.width - 25, sideStarHeight, goalStarOuter, new Color(235, 235, 0, 1));
 	goal.draw = drawGoalStar;
 	goal.goalType = 'blue';
 	items.push(goal);
-	new Platform(canvas.width - 50, canvas.width, sideStarHeight + 20, colors[2]);
+	new Platform(canvas.width - 50, canvas.width, sideStarHeight + 30, colors[2]);
 }
 
 function Item(x, y, pickupRadius, color) {
