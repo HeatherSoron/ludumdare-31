@@ -9,6 +9,21 @@
 		
 		<script src="js/main.js"></script>
 		
+		<style>
+			.red {
+				color: red;
+				font-style: bold;
+			}
+			.green {
+				color: green;
+				font-style: bold;
+			}
+			.blue {
+				color: blue;
+				font-style: bold;
+			}
+		</style>
+		
 	</head>
 	<body onload="init()">
 		<canvas id="game" width=800 height=600 style="border: 1px dashed black; float: left"></canvas>
@@ -19,7 +34,16 @@
 					<li>left/right (arrow keys) to move</li>
 					<li>space to jump</li>
 					<li>up/down to shift color</li>
-					<li>q,w,e to place colored platforms</li>
+					<li><span class="red">q</span>, <span class="green">w</span>, <span class="blue">e</span> to place colored platforms</li>
+					<li><span class="red">a</span>, <span class="green">s</span>, <span class="blue">d</span> to attack</li>
+				</ul>
+			</p>
+			<p>
+				Tips:
+				<ul>
+					<li>Kill ALL the enemies - killing enemies refills your power bars</li>
+					<li>When your current color's power is low,<br/> you're vulnerable!<br/> Switch to a color where you have lots of power</li>
+					<li>After you've gained a power-up star,<br/> your gain double power in a corresponding color</li>
 				</ul>
 			</p>
 			<div class="debug">Key code: <span id="keycode">?</span></div>
