@@ -2,6 +2,7 @@ var keys = {
 	'a': 65,
 	'd': 68,
 	'e': 69,
+	'f': 70,
 	's': 83,
 	'q': 81,
 	'w': 87,
@@ -50,6 +51,11 @@ function handleKeyDown(e) {
 		case keys.d:
 			if (!keysHeld[e.keyCode]) {
 				player.attack(2);
+			}
+			break;
+		case keys.f:
+			if (!keysHeld[e.keyCode]) {
+				player.attack();
 			}
 			break;
 			

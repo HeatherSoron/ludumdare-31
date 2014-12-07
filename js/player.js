@@ -157,15 +157,37 @@ player.placePlatform = function(colorIndex) {
 }
 
 player.attack = function(colorIndex) {
+	var minPower = 10;
+	var powerUsed = 0.5;
+	
 	// remember that colorIndex can be false-y! (0 is a valid value)
 	if (colorIndex === undefined) {
-		colorIndex = this.color;
+		color = new Color(0, 0, 0, 0.7, 'black');
+		powerUsed = 5;
+		var hasPower = false;
+		for (var key in player.power) {
+			if (player.power[key][0] > minPower) {
+				hasPower = true;
+			}
+		}
+		if (!hasPower) {
+			return false;
+		}
+	} else {
+		color = colors[colorIndex];
+	}
+	
+	for (var key in player.power) {
+		if (color.black || color[key[0]]) {
+			current = player.power[key][0];
+			player.power[key][0] = Math.max(minPower, current - powerUsed);
+		}
 	}
 	
 	this.attackBall = {
 		growing: true,
 		radius: 0,
-		color: colors[colorIndex],
+		color: color,
 	};
 }
 
