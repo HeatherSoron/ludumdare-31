@@ -31,6 +31,16 @@ function render() {
 		}
 	}
 	
+	var deadParts = [];
+	for (var i = 0; i < particles.length; ++i) {
+		if (!particles[i].simAndDraw()) {
+			deadParts.push(i);
+		}
+	}
+	for (var i = deadParts.length - 1; i >= 0; --i) {
+		particles.splice(deadParts[i], 1);
+	}
+	
 	drawPowerBar('red', 20);
 	drawPowerBar('green', canvas.width/2 - player.power.green[1]/2);
 	drawPowerBar('blue', canvas.width - (player.power.blue[1] + 20));
@@ -68,6 +78,28 @@ function drawPowerBar(colorName, left) {
 	ctx.rect(left, 10, power[0], 15);
 	ctx.fill();
 	ctx.globalAlpha = 1;
+}
+
+
+function drawStar(center, outer, inner, pointCount, rot, color) {
+	var outerPoints = [];
+	var innerPoints = [];
+	var innerIndexOffset = Math.ceil(pointCount / 2.0);
+	for (var i = 0; i < pointCount; ++i) {
+		var angle = Math.PI * 2 * ((i + rot) / pointCount);
+		outerPoints.push(center.offsetByRadius(outer, angle));
+		innerPoints.push(center.offsetByRadius(inner, angle + Math.PI));
+	}
+	
+	ctx.beginPath();
+	ctx.fillStyle = color.toString();
+	ctx.moveTo(innerPoints[2].x, innerPoints[2].y);
+	for (var i = 0; i < pointCount; ++i) {
+		ctx.lineTo(outerPoints[i].x, outerPoints[i].y);
+		var innerIndex = (i + innerIndexOffset) % pointCount;
+		ctx.lineTo(innerPoints[innerIndex].x, innerPoints[innerIndex].y);
+	}
+	ctx.fill();
 }
 
 
@@ -112,6 +144,13 @@ Color.prototype.clone = function() {
 Color.prototype.setAlpha = function(a) {
 	this.a = a;
 	return this;
+}
+
+Color.prototype.fade = function() {
+	if (this.fadeRate) {
+		console.log(this.a, this.fadeRate);
+		this.a -= this.fadeRate;
+	}
 }
 
 

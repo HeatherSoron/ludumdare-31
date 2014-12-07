@@ -76,6 +76,10 @@ Mob.prototype.sufferAttack = function() {
 						if (player.power[key][0] > max) {
 							player.power[key][0] = max;
 						}
+						var targColor = new Color(0, 0, 0, 0.7, key);
+						targColor[key[0]] = 255;
+						this.genDeathParticle(targColor, Math.PI);
+						this.genDeathParticle(targColor, 0);
 					}
 				}
 				return true;
@@ -83,6 +87,12 @@ Mob.prototype.sufferAttack = function() {
 		}
 	}
 	return false;
+}
+
+Mob.prototype.genDeathParticle = function(color, dir) {
+	var variance = 10;
+	var randDir = (Math.random() * variance - variance/2) + dir;
+	new Particle(this.x, this.y + mobSize/2, this.color, color, 20, 2, undefined, randDir, 0);
 }
 
 Mob.prototype.attackPlayer = function() {
