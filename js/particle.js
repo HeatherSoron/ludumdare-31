@@ -27,6 +27,10 @@ Particle.prototype.simAndDraw = function() {
 	this.x += this.speed * Math.cos(this.dir);
 	this.y += this.speed * Math.sin(this.dir);
 	
+	if (this.accelFunc) {
+		this.accelFunc();
+	}
+	
 	var color;
 	if (this.life > this.maxLife / 2) {
 		color = new Color(0, 0, 0, alpha, 'part');
@@ -50,4 +54,8 @@ Particle.prototype.simAndDraw = function() {
 		return false;
 	}
 	return true;
+}
+
+function decayParticleSpeed() {
+	this.speed /= 1.125;
 }

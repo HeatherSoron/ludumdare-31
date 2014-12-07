@@ -78,8 +78,10 @@ Mob.prototype.sufferAttack = function() {
 						}
 						var targColor = new Color(0, 0, 0, 0.7, key);
 						targColor[key[0]] = 255;
-						this.genDeathParticle(targColor, Math.PI);
-						this.genDeathParticle(targColor, 0);
+						for (var i = 0; i < 4; ++i) {
+							this.genDeathParticle(targColor, Math.PI);
+							this.genDeathParticle(targColor, 0);
+						}
 					}
 				}
 				return true;
@@ -90,9 +92,10 @@ Mob.prototype.sufferAttack = function() {
 }
 
 Mob.prototype.genDeathParticle = function(color, dir) {
-	var variance = 10;
+	var variance = Math.PI / 2;
 	var randDir = (Math.random() * variance - variance/2) + dir;
-	new Particle(this.x, this.y + mobSize/2, this.color, color, 40, 2, undefined, randDir, 0);
+	var randSpeed = Math.random() + 10;
+	new Particle(this.x, this.y + mobSize/2, this.color, color, 40, randSpeed, decayParticleSpeed, randDir, 0);
 }
 
 Mob.prototype.attackPlayer = function() {
