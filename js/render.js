@@ -93,7 +93,7 @@ function drawPowerBar(colorName, left) {
 	
 	ctx.globalAlpha = 0.8;
 	ctx.beginPath();
-	ctx.fillStyle = colorName;
+	ctx.fillStyle = colorName == 'green' ? 'lime' : colorName;
 	ctx.rect(left, 10, power[0], 15);
 	ctx.fill();
 	ctx.globalAlpha = 1;
