@@ -52,7 +52,7 @@ player.draw = function() {
 	
 	
 	ctx.fillStyle = this.getColor().toString();
-	ctx.fill();
+	//ctx.fill();
 	
 	this.previousColors.push(this.getColor().clone().setAlpha(0.1));
 	if (this.previousColors.length > 15) {

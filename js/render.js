@@ -1,7 +1,7 @@
 var canvas;
 var ctx;
 
-var alpha = 1.0 / 3.0;
+var alpha = 1.0 / 2.0;
 
 var colors = [
 	new Color(255, 0, 0, alpha, 'red'),
