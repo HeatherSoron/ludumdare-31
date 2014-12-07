@@ -92,7 +92,7 @@ Mob.prototype.sufferAttack = function() {
 Mob.prototype.genDeathParticle = function(color, dir) {
 	var variance = 10;
 	var randDir = (Math.random() * variance - variance/2) + dir;
-	new Particle(this.x, this.y + mobSize/2, this.color, color, 20, 2, undefined, randDir, 0);
+	new Particle(this.x, this.y + mobSize/2, this.color, color, 40, 2, undefined, randDir, 0);
 }
 
 Mob.prototype.attackPlayer = function() {
